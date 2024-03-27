@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Авторизация</title>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Авторизация</h2>
+      <form action="login.php" method="post">
+        <input type="text" name="username" placeholder="Логин" required /><br />
+        <input
+          type="password"
+          name="password"
+          placeholder="Пароль"
+          required
+        /><br />
+        <input type="submit" value="Вход" />
+      </form>
+      <button onclick="registerUser()">Регестрация</button>
+      <!-- Кнопка регистрации -->
+    </div>
+  </body>
+  <script>
+    // Код для регистрации пользователя и сохранения в localStorage
+    function registerUser() {
+      var usernameInput = document.querySelector('input[name="username"]');
+      var passwordInput = document.querySelector('input[name="password"]');
+
+      var username = usernameInput.value;
+      var password = passwordInput.value;
+
+      // Создаем объект для нового пользователя с логином и паролем
+      var newUser = {
+        username: username,
+        password: password,
+      };
+
+      // Получаем текущий список пользователей из localStorage
+      var existingUsers = JSON.parse(localStorage.getItem("users")) || [];
+
+      // Добавляем нового пользователя к списку пользователей
+      existingUsers.push(newUser);
+
+      // Сохраняем обновленный список пользователей в localStorage
+      localStorage.setItem("users", JSON.stringify(existingUsers));
+
+      // Очищаем поля ввода после регистрации
+      usernameInput.value = "";
+      passwordInput.value = "";
+
+      alert("Пользователь успешно зарегистрирован!");
+
+      // Выводим все данные о пользователях в консоль для проверки
+      console.log("Все пользователи:", existingUsers);
+    }
+
+    // Код для аутентификации пользователя
+    document.querySelector("form").addEventListener("submit", function (event) {
+      event.preventDefault(); // Предотвращаем отправку формы
+
+      var usernameInput = document.querySelector('input[name="username"]');
+      var passwordInput = document.querySelector('input[name="password"]');
+
+      var username = usernameInput.value;
+      var password = passwordInput.value;
+
+      // Получаем список пользователей из localStorage
+      var existingUsers = JSON.parse(localStorage.getItem("users")) || [];
+
+      // Проверяем, есть ли пользователь с таким логином и паролем
+      var authenticatedUser = existingUsers.find(function (user) {
+        return user.username === username && user.password === password;
+      });
+
+      if (authenticatedUser) {
+        alert("Вы успешно вошли!");
+        window.location.href = "index.html";
+      } else {
+        alert("Неверный логин или пароль!");
+      }
+
+      // Очищаем поля ввода после попытки входа
+      usernameInput.value = "";
+      passwordInput.value = "";
+    });
+  </script>
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url("img/5509862.jpg"); /* Путь к вашей картинке */
+      background-size: 100%, cover; /* Растягиваем изображение на всю область фона */
+      background-position: 50% 0%;
+      background-attachment: fixed;
+    }
+    .container {
+      width: 300px;
+      margin: 80px 65em;
+      height: 550px;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.9);
+      border: 1px solid #ccc;
+      border-radius: 17px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      text-align: center;
+      font-size: 30px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      font-size: 15px;
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    input[type="submit"],
+    button {
+      font-size: 15px;
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      box-sizing: border-box;
+      border: none;
+      border-radius: 8px;
+      background-color: #8743fc;
+      color: #fff;
+      cursor: pointer;
+    }
+    input[type="submit"]:hover,
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</html>

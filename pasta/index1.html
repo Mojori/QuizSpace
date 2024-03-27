@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Eshkere</title>
+</head>
+<body>
+    <p class="my-class" id="sigma">абзаца с class = "my-class". Класс задает красный цвет</p>
+    <div><input type="submit" value="Нажми - и я выведу класс абзаца" onclick="func()"></div>
+    <div><input type="submit" value="Нажми - и я добавлю класс" onclick="func1()"></div>
+</body>
+
+<script>
+
+function func() {
+    var elem = document.getElementById('sigma');
+    elem.classList.remove("my-class");
+    alert("my-class удален");
+}
+
+function func1() {
+    var elem = document.getElementById('sigma');
+    elem.classList.add("my-class");
+    alert("my-class добавлен");
+}
+
+</script>
+
+<style>
+
+.my-class {
+    color: red;
+}
+
+</style>
+</html>

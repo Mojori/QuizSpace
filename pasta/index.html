@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Pyatnashki</title>
+</head>
+<body class="">
+    <div class="timer">00:00</div>
+    <div class="box"></div>
+    <div class="end-game">
+        <span>П</span>
+        <span>o</span>
+        <span>б</span>
+        <span>е</span>
+        <span>д</span>
+        <span>а</span>
+        <span>!</span>
+        <span>!</span>
+        <span>!</span>
+    </div>
+</body>
+<script>
+
+    /* объевление переменных*/
+    const arrSquare = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, null]
+    const box = document.querySelector('.box')
+    const endGameBox = document.querySelector('.end-game')
+    const timer = document.querySelector('.timer')
+    
+    let intTime = 0
+    let intTimeM = 0
+    let intTimeS = 0
+    let ClickScore = 0
+    let startTimer = false
+    let divBackEmpty //пустой блок
+
+    /*вызов функцый*/
+    shuffle(arrSquare)
+    createBox()
+    endGameBox.addEventListener('click', newGame)
+    setInterval(()=>{
+        if(!startTimer){
+        return false
+        }
+        let strTime
+        intTimeS++
+        if(intTimeS==60){
+            intTimeM++
+            intTimeS = 0
+        }
+        strTime = String(intTimeM).padStart(2,'0')+':'
+        strTime += String(intTimeS).padStart(2, '0')
+        console.log(intTime)
+        timer.innerHTML = strTime
+},1000)
+
+    
+    /* ---Описание фунций--- */
+    /* перемешивание массива*/
+    function shuffle(array) {
+        array.sort(() => Math.random() - 0.5)
+    }
+    
+    function createBox(){
+        let x = 0
+        let y = -1
+        intTimeS = 0
+        intTimeM = 0
+        startTimer = false
+        timer.innerHTML = '00:00'
+        arrSquare.forEach((num, index)=>{
+            let divNum = document.createElement('div')
+            let divBack = document.createElement('div')
+            divBack.addEventListener('click', clickNumber)
+            divNum.classList.add('number')
+            divBack.classList.add('back')
+            if ((index) % 4 == 0){
+                y++
+                x=0
+            }
+            divBack.dataset.top = (y * 60) + 10
+            divBack.dataset.left = (x * 60) + 10
+            divBack.dataset.index = index
+            divBack.style.top = (y * 60) + 10 + 'px'
+            divBack.style.left = (x * 60) + 10 + 'px'
+            x++
+            if(num != null){
+                divNum.innerHTML = num
+                divBack.append(divNum)
+            }
+            else{
+                divBackEmpty = divBack
+            }
+            box.append(divBack)
+        })
+    }
+    
+    function clickNumber(e) {
+        startTimer = true
+        if (e.target.innerHTML == ''){
+            return false
+
+        }
+
+        let divBack = e.target.parentNode
+        let tempDiv = {}
+        let topP = divBackEmpty.dataset.top - divBack.dataset.top
+        let leftP = divBackEmpty.dataset.left - divBack.dataset.left
+        topP = Math.abs(topP)
+        leftP = Math.abs(leftP)
+
+        if(!((topP == 0 && leftP == 60) || (topP == 60 && leftP == 0 ))){
+            return false 
+        }
+
+        /*заполняем значение пустого Div */
+
+        tempDiv.top = divBackEmpty.dataset.top
+        tempDiv.left = divBackEmpty.dataset.left
+        tempDiv.index = divBackEmpty.dataset.index
+        /*пустой Div ставим на место заполненого*/
+        divBackEmpty.dataset.top = divBack.dataset.top
+        divBackEmpty.dataset.left = divBack.dataset.left
+        divBackEmpty.dataset.index = divBack.dataset.index
+        divBackEmpty.style.top = divBack.style.top
+        divBackEmpty.style.left = divBack.style.left
+        divBack.style.zIndex = '0'
+        /* заполняем Div ставим на пустого */
+        divBack.dataset.top = tempDiv.top
+        divBack.dataset.left = tempDiv.left
+        divBack.dataset.index = tempDiv.index
+        divBack.style.top = tempDiv.top + "px"
+        divBack.style.left = tempDiv.left + "px"
+        divBack.style.zIndex = '20' 
+        if (endGame()){
+            statusbar = false
+            setTimeout(()=>{
+                document.body.classList.add('end');
+            },700)
+            
+        }
+        console.log(endGame())
+    
+    } 
+    function endGame(){
+        flag = true
+        box.childNodes.forEach(item => {
+            let i = item.childNodes[0]==undefined?'16':item.childNodes[0].innerHTML
+            let g = +item.dataset.index + 1
+            if(i != g){
+                flag = false
+                return false
+            }
+        })
+        return flag
+    }
+
+    function newGame(e){
+        if(e.target.localName != 'span')
+            return false;
+        box.innerHTML= '';
+        shuffle(arrSquare)
+        createBox();
+        document.body.classList.remove('end');
+    }
+</script>
+<style>
+    body{
+        margin: 0;
+        display: flex;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(30, 30, 30);
+        position: relative;
+
+    }
+    .end > .box{
+        opacity: 0;
+        width: 0px;
+    }
+   
+    .box{
+        display: block;
+        transition: all .5s linear;
+        opacity: 1;
+        position: relative;
+        width: 250px;
+        height: 250px;
+        background-color: blueviolet;
+        box-shadow: 0px 0px 5px rgb(119, 91, 145,.3),
+                    0px 0px 10px rgb(119, 91, 145,.6),
+                    0px 0px 20px rgb(119, 91, 145,.6),
+                    0px 0px 50px rgb(119, 91, 145,.9);
+    }
+    .back{
+        display: flex;
+        position: absolute;
+        height: 50px;
+        width: 50px;
+        background-color: rgb(101, 24, 100);
+        transition: all .3s linear;
+        
+
+    }
+    .number{
+        font-size: 32px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(83, 25, 138);
+        color: aliceblue;
+        height: 100%;
+        width: 100%;
+        cursor: pointer;
+        user-select: none;
+    }
+    .end-game{
+        transition: opacity .5s linear;
+        opacity: 0;
+        cursor: pointer;
+        width: 0;
+    }
+
+    .end-game:hover{
+        
+    }
+    .end > .end-game{
+        opacity: 1;
+        display: flex;
+        height: 100vh;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(28, 28, 28);
+        
+
+    }
+    .end > .end-game> span{
+        color:  rgb(162, 86, 234);
+        font-size: 3em;
+        font-family: Calibri;
+        font-weight: 900;
+        text-shadow: 0px 0px 5px rgb(192, 57, 192,.3),
+                    0px 0px 10px rgb(192, 57, 192,.6),
+                    0px 0px 20px rgb(192, 57, 192,.6),
+                    0px 0px 50px rgb(192, 57, 192,.9);
+        user-select: none;
+        text-transform: uppercase;
+        animation: case infinite .9s;
+        padding: 2px;
+        cursor: pointer;
+    }
+    .end > .end-game > span:nth-child(2){
+        animation-delay: .1s;
+
+    }
+    .end > .end-game > span:nth-child(3){
+        animation-delay: .2s;
+
+    }
+    .end > .end-game > span:nth-child(4){
+        animation-delay: .3s;
+ 
+    }
+    .end > .end-game > span:nth-child(5){
+        animation-delay: .4s;
+
+    }
+    .end > .end-game > span:nth-child(6){
+        animation-delay: .5s;
+    
+    }
+    .end > .end-game > span:nth-child(7){
+        animation-delay: .6s;
+ 
+    }
+    .end > .end-game > span:nth-child(8){
+        animation-delay: .7s;
+
+    }
+    .end > .end-game> span:nth-child(8){
+        animation-delay: .8s;
+    }
+    @keyframes case{
+        100%{
+            text-transform: lowercase;  
+            filter: hue-rotate(360deg) contrast(175%) brightness(3%);
+            
+        }
+
+
+    }
+    .timer{
+            top: 150px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgb(255, 255, 255);
+            position: absolute;
+            font-size: 2em;
+        }
+</style>
+</html>

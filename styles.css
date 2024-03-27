@@ -1,0 +1,240 @@
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=EB+Garamond:wght@500&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Mukta:wght@600&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Raleway&family=Satisfy&family=Sedgwick+Ave+Display&family=Ubuntu:wght@300&display=swap");
+
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url("img/planetfon3.jpg"); /* Путь к вашей картинке */
+  background-size: 135%, cover; /* Растягиваем изображение на всю область фона */
+  background-position: 50% 0%;
+  background-attachment: fixed;
+}
+
+.container {
+  position: relative;
+  max-width: 100%;
+  max-height: 100%;
+  font-family: "Comfortaa", "EB Garamond", "Lato", "Mukta", "Noto Sans",
+    "Raleway", "Satisfy", "Sedgwick Ave Display", "Ubuntu", Arial, sans-serif;
+}
+
+.text-overlay {
+  position: fixed;
+  top: 9%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 5px;
+  border-radius: 5px;
+  text-align: center;
+}
+/*
+.button-list {
+    list-style-type: none;
+    padding: 0;
+    position: absolute;
+    top: 200%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.button-list li {
+    margin-bottom: 10px;
+}
+
+.button-list a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    font-family: 'Comfortaa', 'EB Garamond', 'Lato', 'Mukta', 'Noto Sans', 'Raleway', 'Satisfy', 'Sedgwick Ave Display', 'Ubuntu', Arial, sans-serif;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.button-list a:hover {
+    background-color: #0056b3;
+}
+*/
+.image-button {
+  position: fixed;
+  top: 74%;
+  left: 17%;
+  filter: brightness(50%);
+  transition: transform 0.3s, filter 0.3s;
+  transform-origin: center;
+}
+
+.image-button:hover {
+  transform: scale(1.2); /* Увеличение размера при наведении */
+  filter: none;
+}
+
+.image-button img {
+  width: 135px;
+  height: auto;
+  border: none;
+}
+
+.image-button .tooltip-text {
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0.7);
+  color: #000000;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  z-index: 1;
+  left: 70%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.image-button:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+.image-button1 {
+  position: fixed;
+  top: 34%;
+  left: 17%;
+  filter: brightness(50%);
+  transition: transform 0.3s, filter 0.3s;
+  transform-origin: center;
+}
+
+.image-button1:hover {
+  transform: scale(1.2); /* Увеличение размера при наведении */
+  filter: none;
+}
+
+.image-button1 img {
+  width: 135px;
+  height: auto;
+  border: none;
+}
+
+.image-button1 .tooltip-text {
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0.7);
+  color: #000000;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s;
+  transform: translate(-60%, 60%);
+}
+
+.image-button1:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+.image-button2 {
+  position: fixed;
+  top: 20%;
+  left: 45%;
+  filter: brightness(50%);
+  transition: transform 0.3s, filter 0.3s;
+  transform-origin: center;
+}
+
+.image-button2:hover {
+  transform: scale(1.2); /* Увеличение размера при наведении */
+  filter: none;
+}
+
+.image-button2 img {
+  width: 151px;
+  height: auto;
+  border: none;
+}
+
+.image-button2 .tooltip-text {
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0.7);
+  color: #000000;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s;
+  transform: translate(1%, -300%);
+}
+
+.image-button2:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+.image-button3 {
+  position: fixed;
+  top: 64%;
+  left: 67%;
+  filter: brightness(50%);
+  transition: transform 0.3s, filter 0.3s;
+  transform-origin: center;
+}
+
+.image-button3:hover {
+  transform: scale(1.2); /* Увеличение размера при наведении */
+  filter: none;
+}
+
+.image-button3 img {
+  width: 135px;
+  height: auto;
+  border: none;
+}
+
+.image-button3 .tooltip-text {
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0.7);
+  color: #000000;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.image-button3:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+.btn-answer {
+  padding: 10px 20px;
+  background-color: #28a745; /* Зеленый цвет */
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-answer:hover {
+  background-color: #218838; /* Зеленый цвет при наведении */
+}
+
+#logoutButton {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 8px 8px;
+  background-color: #ff0000;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+#logoutButton:hover {
+  background-color: #b30000;
+}

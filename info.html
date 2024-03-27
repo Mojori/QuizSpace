@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Info</title>
+  </head>
+  <body>
+    <h1>DataBase</h1>
+    <p>Количество нажатий на подсказку: <span id="hintClicks">0</span></p>
+    <button onclick="clearClicks()">Очистить счетчик</button>
+    <button onclick="check()">Вывести в консоль аккаунты</button>
+    <button onclick="DeleteAcc()">Отчистить все аккаунты</button>
+    <script>
+      // Получаем количество нажатий на подсказку из localStorage
+      var hintClicks = localStorage.getItem("hintClicks");
+      // Если значение не было установлено ранее, устанавливаем его в 0
+      if (!hintClicks) {
+        hintClicks = 0;
+      }
+      // Обновляем отображение количества нажатий на подсказку
+      document.getElementById("hintClicks").innerText = hintClicks;
+
+      // Функция для очистки счетчика
+      function clearClicks() {
+        localStorage.setItem("hintClicks", 0); // Сбрасываем значение в localStorage
+        document.getElementById("hintClicks").innerText = 0; // Обновляем отображение
+      }
+
+      function check() {
+        var user = JSON.parse(localStorage.getItem("users"));
+        console.log(user);
+      }
+
+      function DeleteAcc() {
+        localStorage.setItem("users", 0); // Сбрасываем значение в localStorage
+      }
+    </script>
+  </body>
+</html>

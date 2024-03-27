@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Космический квиз</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+      .container {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+      h1,
+      p {
+        margin-bottom: 20px;
+      }
+      .btn {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        text-decoration: none;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .hint {
+        display: none;
+        margin-top: 10px;
+        color: #28a745;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container" id="welcome-container">
+      <h1>Добро пожаловать в Космический Квиз!</h1>
+      <p>
+        Прежде чем начать квиз, пожалуйста, изучите информацию о российской
+        космонавтике.
+      </p>
+      <p>Первый космический спутник</p>
+      <p>
+        <b
+          >Полёту первого в мире искусственного спутника Земли предшествовала
+          титаническая работа советских ракетных конструкторов. Над созданием
+          искусственного спутника Земли во главе с основоположником практической
+          космонавтики С. П. Королёвым работали учёные М. В. Келдыш, М. К.
+          Тихонравов, Н. С. Лидоренко, В. И. Лапко, Б. С. Чекунов и др.
+          Проектирование велось быстрыми темпами, и изготовление деталей шло
+          параллельно с выпуском чертежей. Спутник делался максимально простым,
+          но надёжным и рассчитанным на проведение целого ряда научных
+          исследований. 4 октября 1957 г. в 22 ч. 28 мин. по московскому времени
+          с 5-го научно-исследовательского полигона Министерства обороны СССР,
+          получившего впоследствии открытое наименование космодром Байконур,
+          была запущена отечественная ракета-носитель Р-7 («Спутник-1»), которая
+          вывела на земную орбиту первый в мире искусственный спутник. Этот день
+          по праву называют началом космической эры человечества, которому
+          впервые удалось преодолеть земное тяготение. Первая космическая
+          скорость, вычисленная ещё Ньютоном, теперь, три столетия спустя, была
+          впервые достигнута творением ума и рук человеческих. Русское слово
+          «спутник» сразу вошло в языки всех народов мира. Первый в истории
+          человечества спутник просуществовал как космическое тело сравнительно
+          недолго — 92 суток, до 4 января 1958 г., совершив 1440 оборотов вокруг
+          Земли (около 60 млн. км), а его радиопередатчики работали в течение
+          двух недель после старта. Зарубежные журналисты писали, что «это было
+          вселенское потрясение», и называли запуск спутника Советским Союзом
+          «не только крупным научным достижением, но и одним из величайших
+          событий в истории всего мира». Благодаря первым советским спутникам
+          мировая наука обогатилась новыми знаниями огромного принципиального
+          значения о верхних слоях земной атмосферы и космическом пространстве.
+          В честь запуска первого в мире искусственного спутника Земли в 1964 г.
+          в Москве на проспекте Мира был сооружён 99-метровый обелиск
+          «Покорителям космоса» в виде взлетающей ракеты с огненным шлейфом.</b
+        >
+      </p>
+      <p>Первый космонавт</p>
+      <p>
+        <b
+          >Юрий Гагарин – первый космонавт. Гагарин Юрий Алексеевич (9.03.1934 -
+          27.03.1968), русский летчик-космонавт, первый в мире человек,
+          совершивший 12 апреля 1961 полет в космос на космическом
+          корабле-спутнике “Восток”. Гагарин облетел земной шар за 1 час 48
+          минут и благополучно вернулся на землю</b
+        >
+      </p>
+      <button class="btn" id="study-btn" onclick="startQuiz()">Я изучил</button>
+    </div>
+
+    <div class="container" style="display: none" id="quiz-container">
+      <h2>Ответьте на вопросы:</h2>
+      <div id="question1">
+        <p>
+          Как называется первый искусственный спутник Земли, запущенный
+          советским Союзом в 1957 году?
+        </p>
+        <input type="text" id="answer1" />
+        <button onclick="checkAnswer(1)">Ответить</button>
+        <button onclick="showHint(1)" id="hintBtn1">Подсказка</button>
+        <div id="hint1" class="hint">Слово начинается на букву "С".</div>
+      </div>
+      <div id="question2">
+        <p>Как зовут первого человека, полетевшего космос?</p>
+        <input type="text" id="answer2" />
+        <button class="btn btn-answer" onclick="checkAnswer(2)">
+          Ответить
+        </button>
+
+        <button onclick="showHint(2)" id="hintBtn2">Подсказка</button>
+        <div id="hint2" class="hint">Имя начинается на букву "Ю".</div>
+      </div>
+      <div id="quiz-stats">
+        <p>Правильных ответов: <span id="correct-answers">0</span></p>
+        <p>Использовано подсказок: <span id="used-hints">0</span></p>
+      </div>
+      <a href="index.html" class="btn" id="next-btn" onclick="nextQuiz()"
+        >Следующее задание</a
+      >
+    </div>
+    <script>
+      let correctAnswersCount = 0;
+      let usedHintsCount = 0;
+      let hintUsed1 = false; // Флаг для отслеживания использования подсказки для вопроса 1
+      let hintUsed2 = false; // Флаг для отслеживания использования подсказки для вопроса 2
+
+      function startQuiz() {
+        document.getElementById("welcome-container").style.display = "none";
+        document.getElementById("quiz-container").style.display = "block";
+      }
+
+      function nextQuiz() {
+        document.getElementById("welcome-container").style.display = "none";
+        document.getElementById("quiz-container").style.display = "none";
+        document.getElementById("second-quiz-container").style.display =
+          "block";
+      }
+
+      function checkAnswer(questionNumber) {
+        let answer;
+        if (questionNumber === 1) {
+          answer = document
+            .getElementById("answer1")
+            .value.trim()
+            .toLowerCase();
+          if (
+            answer === "спутник-1" ||
+            answer === "спутник 1" ||
+            answer === "sputnik-1" ||
+            answer === "sputnik 1"
+          ) {
+            alert("Правильно!");
+            correctAnswersCount++;
+            document.getElementById("correct-answers").innerText =
+              correctAnswersCount;
+            document.getElementById("question1").style.display = "none";
+            document.getElementById("answer1").value = "";
+            document.getElementById("hint1").style.display = "none";
+          } else {
+            alert("Неправильно!");
+          }
+        } else if (questionNumber === 2) {
+          answer = document
+            .getElementById("answer2")
+            .value.trim()
+            .toLowerCase();
+          if (answer === "юрий гагарин" || answer === "yurii gagarin") {
+            alert("Правильно!");
+            correctAnswersCount++;
+            document.getElementById("correct-answers").innerText =
+              correctAnswersCount;
+            document.getElementById("question2").style.display = "none";
+            document.getElementById("answer2").value = "";
+            document.getElementById("hint2").style.display = "none";
+          } else {
+            alert("Неправильно!");
+          }
+        }
+      }
+
+      function showHint(questionNumber) {
+        var hintClicks;
+        if (questionNumber === 1 && !hintUsed1) {
+          document.getElementById("hint1").style.display = "block";
+          usedHintsCount++;
+          document.getElementById("used-hints").innerText = usedHintsCount;
+          document.getElementById("hintBtn1").disabled = true; // Деактивируем кнопку подсказки после использования
+          hintUsed1 = true;
+
+          // Получаем текущее количество нажатий на подсказку из localStorage
+          hintClicks = parseInt(localStorage.getItem("hintClicks")) || 0;
+          // Увеличиваем количество нажатий на подсказку на 1
+          hintClicks++;
+          // Сохраняем обновленное количество нажатий на подсказку в localStorage
+          localStorage.setItem("hintClicks", hintClicks);
+        } else if (questionNumber === 2 && !hintUsed2) {
+          document.getElementById("hint2").style.display = "block";
+          usedHintsCount++;
+          document.getElementById("used-hints").innerText = usedHintsCount;
+          document.getElementById("hintBtn2").disabled = true; // Деактивируем кнопку подсказки после использования
+          hintUsed2 = true;
+
+          // Получаем текущее количество нажатий на подсказку из localStorage
+          hintClicks = parseInt(localStorage.getItem("hintClicks")) || 0;
+          // Увеличиваем количество нажатий на подсказку на 1
+          hintClicks++;
+          // Сохраняем обновленное количество нажатий на подсказку в localStorage
+          localStorage.setItem("hintClicks", hintClicks);
+        }
+      }
+    </script>
+  </body>
+</html>
